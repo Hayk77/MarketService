@@ -1,0 +1,23 @@
+# Visual Studio / Rider / VSCode
+.vs/
+obj/
+bin/
+*.user
+*.suo
+*.userprefs
+*.sln.docstates
+
+# Rider / JetBrains
+.idea/
+
+# Logs
+*.log
+
+# NuGet
+*.nupkg
+*.snupkg
+packages/
+
+# OS
+.DS_Store
+Thumbs.db
