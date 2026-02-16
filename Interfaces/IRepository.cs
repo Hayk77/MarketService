@@ -12,6 +12,6 @@ namespace MyProject.Interfaces
         (byte[] hash, byte[] salt) GetAdminPassword();
         bool BuyProductForUser(User user, Product product, int quantity);
         bool BuyProductForMarket(Product product);
-
+        IEnumerable<OrderDetailsDto> GetOrderDetails();
     }
 }

@@ -166,4 +166,40 @@ public class Repository : IRepository
             return true;
         }
     }
+
+    public IEnumerable<OrderDetailsDto> GetOrderDetails()
+    {
+        List<OrderDetailsDto> result = new List<OrderDetailsDto>();
+
+        using SqlConnection connection = new SqlConnection(_connectionString);
+        using SqlCommand sql = new SqlCommand(@"
+        select p.[Name] as ProductName,
+               oi.quantity as Quantity,
+               oi.price as Price,
+               o.totalPrice as TotalPrice,
+               u.[Name] as UserName,
+               u.Email
+        from dbo.orderitems as oi
+        join dbo.products as p on oi.productId = p.Id
+        join dbo.orders as o on oi.orderId = o.id
+        join dbo.users as u on o.userId = u.id", connection);
+        {
+            connection.Open();
+            using SqlDataReader reader = sql.ExecuteReader();
+
+            while (reader.Read())
+            {
+                result.Add(new OrderDetailsDto
+                {
+                    ProductName = reader["ProductName"].ToString(),
+                    Quantity = (int)reader["Quantity"],
+                    Price = (decimal)reader["Price"],
+                    TotalPrice = (decimal)reader["TotalPrice"],
+                    UserName = reader["UserName"].ToString(),
+                    Email = reader["Email"].ToString()
+                });
+            }
+        }
+        return result;
+    }
 }
