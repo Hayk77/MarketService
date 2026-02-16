@@ -15,7 +15,8 @@ namespace MyProject
             UpdateProductPrice = 4,
             DeleteProduct = 5,
             GetAllProductsQuantity = 6,
-            GetProductsSellIncome = 7
+            GetProductsSellIncome = 7,
+            GetAllOrderDetails = 8,
         }
 
         public enum UserMenu
@@ -57,7 +58,7 @@ namespace MyProject
                         if (marketService.IsAdmin(password))
                         {
                             Console.WriteLine("1.Buy product | 2.Check balance | 3.Get all products | 4.Update product price | 5.Delete product" +
-                            "                        6.Get all products quantity | 7.Get products sell income |0.Exit");
+                            "                        6.Get all products quantity | 7.Get products sell income | 8.Get all orders details |0.Exit");
                             Console.Write("Select: ");
                             int input = int.Parse(Console.ReadLine());
 
@@ -141,6 +142,16 @@ namespace MyProject
                                     decimal income = marketService.GetProductsSellIncome();
                                     Console.WriteLine($"All products sell income: {income}");
                                     break;
+
+                                case AdminMenu.GetAllOrderDetails:
+                                    var allOrderDetails = marketService.GetAllOrderDetails();
+
+                                    foreach (var currentOrder in allOrderDetails)
+                                    {
+                                        Console.WriteLine($"{currentOrder.ProductName} | {currentOrder.Quantity} | {currentOrder.Price} | {currentOrder.TotalPrice} | {currentOrder.UserName} | {currentOrder.Email}");
+                                    }
+                                    break;
+
                             }
                         }
                         else

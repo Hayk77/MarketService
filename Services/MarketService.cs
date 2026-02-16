@@ -99,6 +99,10 @@ namespace MyProject.Services
                 return false;
             }
         }
+        public IEnumerable<OrderDetailsDto> GetAllOrderDetails()
+        {
+            return _repository.GetOrderDetails();
+        }
     }
 
 }

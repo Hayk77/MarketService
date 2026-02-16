@@ -13,5 +13,6 @@ namespace MyProject.Interfaces
         bool UpdateProductPrice(decimal newPrice, string productName);
         bool DeleteProduct(string productName);
         bool BuyProductForMarket(Product product);
+        IEnumerable<OrderDetailsDto> GetAllOrderDetails();
     }
 }
