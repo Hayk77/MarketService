@@ -1,6 +1,6 @@
 ﻿using System.Security.Cryptography;
 
-namespace MyProject.Models
+namespace MyProject.PasswordHashers
 {
     public class PasswordHasher
     {
