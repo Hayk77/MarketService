@@ -1,6 +1,7 @@
 ﻿using MyProject.Interfaces;
 using MyProject.Models;
 using System.Data;
+using MyProject.PasswordHashers;
 
 namespace MyProject.Services
 {
