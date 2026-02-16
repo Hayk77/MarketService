@@ -2,32 +2,13 @@
 using MyProject.Models;
 using MyProject.Repositories;
 using MyProject.Services;
+using MyProject.Enums;
+
 
 namespace MyProject
 {
     internal class Program
     {
-        public enum AdminMenu
-        {
-            BuyProduct = 1,
-            CheckBalance = 2,
-            GetAllProducts = 3,
-            UpdateProductPrice = 4,
-            DeleteProduct = 5,
-            GetAllProductsQuantity = 6,
-            GetProductsSellIncome = 7,
-            GetAllOrderDetails = 8,
-        }
-
-        public enum UserMenu
-        {
-            AddUser = 1,
-            GetAllProducts = 2,
-            BuyProduct = 3,
-            AddBalance = 4,
-            GetBalance = 5
-        }
-
         static void Main(string[] args)
         {
             User user = new User();
