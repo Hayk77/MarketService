@@ -14,5 +14,6 @@ namespace MyProject.Interfaces
         bool DeleteProduct(string productName);
         bool BuyProductForMarket(Product product);
         IEnumerable<OrderDetailsDto> GetAllOrderDetails();
+        TopSoldProductDto GetMostSoldProduct();
     }
 }

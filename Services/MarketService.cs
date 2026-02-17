@@ -1,7 +1,7 @@
 ﻿using MyProject.Interfaces;
 using MyProject.Models;
-using System.Data;
 using MyProject.PasswordHashers;
+using System.Data;
 
 namespace MyProject.Services
 {
@@ -104,6 +104,16 @@ namespace MyProject.Services
         public IEnumerable<OrderDetailsDto> GetAllOrderDetails()
         {
             return _repository.GetOrderDetails();
+        }
+
+        public TopSoldProductDto GetMostSoldProduct()
+        {
+            var result = _repository.GetTopSoldProduct();
+
+            if (result == null)
+                throw new Exception("No sales found");
+
+            return result;
         }
     }
 

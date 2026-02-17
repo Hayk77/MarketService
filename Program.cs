@@ -39,7 +39,7 @@ namespace MyProject
                         if (marketService.IsAdmin(password))
                         {
                             Console.WriteLine("1.Buy product | 2.Check balance | 3.Get all products | 4.Update product price | 5.Delete product" +
-                            "                        6.Get all products quantity | 7.Get products sell income | 8.Get all orders details |0.Exit");
+                            "                        6.Get all products quantity | 7.Get products sell income | 8.Get all orders details | 9.Get top sold product |0.Exit");
                             Console.Write("Select: ");
                             int input = int.Parse(Console.ReadLine());
 
@@ -134,6 +134,11 @@ namespace MyProject
                                     }
                                     break;
 
+                                case AdminMenu.GetMostSoldProduct:
+                                    var topProduct = marketService.GetMostSoldProduct();
+
+                                    Console.WriteLine( $"Most sold product: {topProduct.ProductName}\nQuantity: {topProduct.TotalSoldQuantity}");
+                                    break;
                             }
                         }
                         else

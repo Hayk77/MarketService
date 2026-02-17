@@ -16,5 +16,6 @@ namespace MyProject.Enums
         GetAllProductsQuantity = 6,
         GetProductsSellIncome = 7,
         GetAllOrderDetails = 8,
+        GetMostSoldProduct = 9
     }
 }

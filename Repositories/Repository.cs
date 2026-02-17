@@ -204,4 +204,30 @@ public class Repository : IRepository
         }
         return result;
     }
+
+    public TopSoldProductDto GetTopSoldProduct()
+    {
+        using SqlConnection connection = new SqlConnection(_connectionString);
+        using SqlCommand sql = new SqlCommand(
+            @"SELECT TOP 1
+              p.[Name] AS ProductName,
+              SUM(oi.Quantity) AS TotalSoldQuantity
+          FROM dbo.orderitems oi
+          JOIN dbo.products p ON oi.productId = p.Id
+          JOIN dbo.orders o ON oi.orderId = o.Id
+          GROUP BY p.[Name]
+          ORDER BY SUM(oi.Quantity) DESC", connection);
+
+        connection.Open();
+        using SqlDataReader reader = sql.ExecuteReader();
+
+        if (!reader.Read())
+            return null;
+
+        return new TopSoldProductDto
+        {
+            ProductName = (string)reader["ProductName"],
+            TotalSoldQuantity = (int)reader["TotalSoldQuantity"]
+        };
+    }
 }
