@@ -13,5 +13,6 @@ namespace MyProject.Interfaces
         bool BuyProductForUser(User user, Product product, int quantity);
         bool BuyProductForMarket(Product product);
         IEnumerable<OrderDetailsDto> GetOrderDetails();
+        TopSoldProductDto GetTopSoldProduct();
     }
 }
