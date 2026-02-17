@@ -178,7 +178,8 @@ public class Repository : IRepository
                oi.price as Price,
                o.totalPrice as TotalPrice,
                u.[Name] as UserName,
-               u.Email
+               u.Email,
+               o.CreatedAt
         from dbo.orderitems as oi
         join dbo.products as p on oi.productId = p.Id
         join dbo.orders as o on oi.orderId = o.id
@@ -191,12 +192,13 @@ public class Repository : IRepository
             {
                 result.Add(new OrderDetailsDto
                 {
-                    ProductName = reader["ProductName"].ToString(),
+                    ProductName = (string)reader["ProductName"],
                     Quantity = (int)reader["Quantity"],
                     Price = (decimal)reader["Price"],
                     TotalPrice = (decimal)reader["TotalPrice"],
-                    UserName = reader["UserName"].ToString(),
-                    Email = reader["Email"].ToString()
+                    UserName = (string)reader["UserName"],
+                    Email = (string)reader["Email"],
+                    CreatedAt = (DateTime)reader["CreatedAt"]
                 });
             }
         }
