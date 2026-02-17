@@ -129,7 +129,8 @@ namespace MyProject
 
                                     foreach (var currentOrder in allOrderDetails)
                                     {
-                                        Console.WriteLine($"{currentOrder.ProductName} | {currentOrder.Quantity} | {currentOrder.Price} | {currentOrder.TotalPrice} | {currentOrder.UserName} | {currentOrder.Email}");
+                                        Console.WriteLine($"{currentOrder.ProductName} | {currentOrder.Quantity} | {currentOrder.Price} |" +
+                                        $"{currentOrder.TotalPrice} | {currentOrder.UserName} | {currentOrder.Email} | {currentOrder.CreatedAt}");
                                     }
                                     break;
 
