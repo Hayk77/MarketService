@@ -8,10 +8,12 @@ namespace MyProject.Services
     public class MarketService : IMarketService
     {
         private readonly IRepository _repository;
+        private readonly RedisCacheService _cache;
 
         public MarketService(IRepository repository)
         {
             _repository = repository ?? throw new ArgumentNullException(nameof(repository));
+            _cache = new RedisCacheService();
         }
 
         public bool IsAdmin(string password)
@@ -22,17 +24,37 @@ namespace MyProject.Services
 
         public string GetMarketName()
         {
+            var cacheKey = "market:name";
+            var cached = _cache.Get(cacheKey);
+
+            if (cached != null)
+                return cached;
+
             var market = _repository.GetAll<Market>().FirstOrDefault(m => m.Id == 1);
             if (market == null)
+            {
                 throw new Exception("Market not found!");
+            }
+
+            _cache.Set(cacheKey, market.Name, TimeSpan.FromMinutes(5));
             return market.Name;
         }
 
         public decimal GetMarketBalance()
         {
+            var cacheKey = "market:balance";
+            var cached = _cache.Get(cacheKey);
+
+            if (cached != null)
+                return decimal.Parse(cached);
+
             var market = _repository.GetAll<Market>().FirstOrDefault(m => m.Id == 1);
             if (market == null)
+            {
                 throw new Exception("Market not found!");
+            }
+
+            _cache.Set(cacheKey, market.Balance.ToString(), TimeSpan.FromMinutes(5));
             return market.Balance;
         }
 
